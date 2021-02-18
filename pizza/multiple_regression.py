@@ -5,7 +5,6 @@ def predict(X, w):
     """
     X is a NumPy matrice containing the model inputs
     w is a number representing the "weight" or slope of the line
-    b is a number representing the "bias" or y-intercept of the line
 
     Try to predict the value of y based on the values of the X inputs
     and the weight of the line.
@@ -18,7 +17,6 @@ def loss(X, Y, w):
     X is a NumPy matrice containing the model inputs
     Y is a NumPy matrice representing the ground truth
     w is a number representing the "weight" or slope of the line
-    b is a number representing the "bias" or y-intercept of the line
 
     We square the error so that:
         - we can be sure that it will be a positive number
@@ -43,8 +41,11 @@ def train(X, Y, iterations, lr):
 
 
 x1, x2, x3, y = np.loadtxt("pizza_3_vars.txt", skiprows=1, unpack=True)
-X = np.column_stack((x1, x2, x3))
+X = np.column_stack((np.ones(x1.size), x1, x2, x3))
 Y = y.reshape(-1, 1)
 w = train(X, Y, iterations=100000, lr=0.001)
-# print("\nw=%.10f, b=%.10f" % (w, b))
-# print("Prediction: x=%d => y=%.2f" % (20, predict(20, w, b)))
+
+print("\nWeights: %s" % w.T)
+print("\nA few predictions:")
+for i in range(5):
+    print("X[%d] row=%s -> %.4f (label: %d)" % (i, X[i], predict(X[i], w), Y[i]))

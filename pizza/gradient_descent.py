@@ -47,6 +47,6 @@ def train(X, Y, iterations, lr):
 
 
 X, Y = np.loadtxt("pizza.txt", skiprows=1, unpack=True)
-w, b = train(X, Y, iterations=20000, lr=0.001)
+w, b = train(X, Y, iterations=100000, lr=0.001)
 print("\nw=%.10f, b=%.10f" % (w, b))
 print("Prediction: x=%d => y=%.2f" % (20, predict(20, w, b)))
